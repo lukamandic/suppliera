@@ -1,0 +1,53 @@
+version: '3'
+
+services:
+  brands:
+    build: ./backend/brands/
+    volumes:
+      - ./backend/brands:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - 3000:3000
+    command: npm start
+    links:
+      - db
+  categories:
+    build: ./backend/categories/
+    volumes:
+      - ./backend/categories:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - 3001:3000
+    command: npm start
+  orders:
+    build: ./backend/orders/
+    volumes:
+      - ./backend/orders:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - 3002:3000
+    command: npm start
+  products:
+    build: ./backend/products/
+    volumes:
+      - ./backend/products:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - 3003:3000
+    command: npm start
+  users:
+    build: ./backend/users/
+    volumes:
+      - ./backend/users:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - 3004:3000
+    command: npm start
+  db:
+    build: ./backend/db/
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: suppliera
+      POSTGRES_USER: suppliera
+    ports:
+      - 5433:5432

@@ -18,21 +18,25 @@ SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
 
-DROP DATABASE suppliera1;
 --
 -- TOC entry 2933 (class 1262 OID 16386)
--- Name: suppliera1; Type: DATABASE; Schema: -; Owner: -
+-- Name: suppliera; Type: DATABASE; Schema: -; Owner: -
 --
 
-CREATE DATABASE suppliera1 WITH TEMPLATE = template0 ENCODING = 'UTF8' LC_COLLATE = 'en_US.UTF-8' LC_CTYPE = 'en_US.UTF-8';
+\connect postgres
+
+DROP DATABASE suppliera;
+
+CREATE DATABASE suppliera WITH TEMPLATE = template0 ENCODING = 'UTF8' LC_COLLATE = 'en_US.UTF-8' LC_CTYPE = 'en_US.UTF-8';
 
 
-\connect suppliera1
+\connect suppliera
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
 SET idle_in_transaction_session_timeout = 0;
 SET client_encoding = 'UTF8';
+
 SET standard_conforming_strings = on;
 SELECT pg_catalog.set_config('search_path', '', false);
 SET check_function_bodies = false;
@@ -169,10 +173,10 @@ INSERT INTO public.categories ("categoryId", "categoryName") VALUES (3, 'Pants  
 -- Data for Name: product; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO public.product ("productId", "productImageSource", "productCode", "productName", "productDescription", "productStock", "productPrice", "productBrand", "productCategory") VALUES (1, '/images/wranglerPants', '1', 'Cowboy Cut Slim Fit Jean', 'Wrangler® Cowboy Cut® jeans are a tried-and-true wardrobe staple for cowboys who demand a lot from their everyday clothes.', 100, 3900, 6, 3);
-INSERT INTO public.product ("productId", "productImageSource", "productCode", "productName", "productDescription", "productStock", "productPrice", "productBrand", "productCategory") VALUES (2, '/images/hanesTShirt', '2', 'Hanes Men’s Everyday Short Sleeve Crewneck T-Shirt
+INSERT INTO public.product ("productId", "productImageSource", "productCode", "productName", "productDescription", "productStock", "productPrice", "productBrand", "productCategory") VALUES (1, '/images/wranglerPants.png', '1', 'Cowboy Cut Slim Fit Jean', 'Wrangler® Cowboy Cut® jeans are a tried-and-true wardrobe staple for cowboys who demand a lot from their everyday clothes.', 100, 3900, 6, 3);
+INSERT INTO public.product ("productId", "productImageSource", "productCode", "productName", "productDescription", "productStock", "productPrice", "productBrand", "productCategory") VALUES (2, '/images/hanesTShirt.png', '2', 'Hanes Men’s Everyday Short Sleeve Crewneck T-Shirt
 ', 'Experience real comfort with this Hanes Everyday Tee. Made with 5.2-oz. super soft cotton.', 100, 1000, 4, 2);
-INSERT INTO public.product ("productId", "productImageSource", "productCode", "productName", "productDescription", "productStock", "productPrice", "productBrand", "productCategory") VALUES (3, '/images/nikeShoes', '3', 'Nike Air VaporMax 360', 'Featuring a full-length foam midsole and VaporMax Air unit, the Nike Air VaporMax 360 gives you remarkable underfoot comfort with bold 2000s style inspired by the Air Max 360.
+INSERT INTO public.product ("productId", "productImageSource", "productCode", "productName", "productDescription", "productStock", "productPrice", "productBrand", "productCategory") VALUES (3, '/images/nikeShoes.jpg', '3', 'Nike Air VaporMax 360', 'Featuring a full-length foam midsole and VaporMax Air unit, the Nike Air VaporMax 360 gives you remarkable underfoot comfort with bold 2000s style inspired by the Air Max 360.
 
 ', 50, 25000, 1, 1);
 
