@@ -43,6 +43,14 @@ services:
     ports:
       - 3004:3000
     command: npm start
+  gateway:
+    build: ./backend/gateway/
+    volumes:
+      - ./backend/gateway:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - 4000:3000
+    command: npm start
   db:
     build: ./backend/db/
     restart: always
