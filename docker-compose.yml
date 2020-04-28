@@ -1,7 +1,17 @@
 version: '3'
 
 services:
+  db:
+    restart: always
+    build: ./backend/db/
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: suppliera
+      POSTGRES_USER: suppliera
+    ports:
+      - 5433:5432
   brands:
+    restart: always
     build: ./backend/brands/
     volumes:
       - ./backend/brands:/usr/src/app
@@ -12,6 +22,7 @@ services:
     links:
       - db
   categories:
+    restart: always
     build: ./backend/categories/
     volumes:
       - ./backend/categories:/usr/src/app
@@ -20,6 +31,7 @@ services:
       - 3001:3000
     command: npm start
   orders:
+    restart: always
     build: ./backend/orders/
     volumes:
       - ./backend/orders:/usr/src/app
@@ -28,6 +40,7 @@ services:
       - 3002:3000
     command: npm start
   products:
+    restart: always
     build: ./backend/products/
     volumes:
       - ./backend/products:/usr/src/app
@@ -36,6 +49,7 @@ services:
       - 3003:3000
     command: npm start
   users:
+    restart: always
     build: ./backend/users/
     volumes:
       - ./backend/users:/usr/src/app
@@ -44,6 +58,7 @@ services:
       - 3004:3000
     command: npm start
   gateway:
+    restart: on-failure:5
     build: ./backend/gateway/
     volumes:
       - ./backend/gateway:/usr/src/app
@@ -51,11 +66,3 @@ services:
     ports:
       - 4000:3000
     command: npm start
-  db:
-    build: ./backend/db/
-    restart: always
-    environment:
-      POSTGRES_PASSWORD: suppliera
-      POSTGRES_USER: suppliera
-    ports:
-      - 5433:5432

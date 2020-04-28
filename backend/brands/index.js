@@ -15,4 +15,17 @@ app.get('/', function(req, res) {
     });
 });
 
+app.get('/paginate', function(req, res) {
+    const { limit, skip } = req.query;
+    console.log(limit);
+
+    pool.query('SELECT * FROM brands LIMIT ' + limit + ' OFFSET ' + skip, (err, data) => {
+        if (!err) {
+            res.send({data: data.rows})
+        } else {
+            console.log(err);
+        }
+    });
+});
+
 app.listen(3000);

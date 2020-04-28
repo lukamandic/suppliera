@@ -1,13 +1,6 @@
 const { buildSchema } = require('graphql');
 
 const schema = buildSchema(`
-    type Query {
-        users: [User],
-        brands: [Brand],
-        products: [Product],
-        categories: [Category],
-        orders: [Order]
-    }
     type Brand {
         brandId: Int,
         brandName: String
@@ -28,7 +21,7 @@ const schema = buildSchema(`
         productId: Int,
         productImageSource: String,
         productCode: String,
-        productName: Int,
+        productName: String,
         productDescription: String,
         productStock: Int,
         productPrice: Int,
@@ -43,6 +36,18 @@ const schema = buildSchema(`
     type Category {
         categoryId: Int,
         categoryName: String,
+    }
+    type Query {
+        users: [User],
+        usersPagination (limit: Int!, skip: Int!): [User],
+        brands: [Brand],
+        brandsPagination (limit: Int!, skip: Int!): [Brand],
+        products: [Product],
+        productsPagination (limit: Int!, skip: Int!): [Product],
+        categories: [Category],
+        categoriesPagination (limit: Int!, skip: Int!): [Category],
+        orders: [Order],
+        ordersPagination (limit: Int!, skip: Int!): [Order],
     }
 `);
 

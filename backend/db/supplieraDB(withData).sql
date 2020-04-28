@@ -164,7 +164,7 @@ INSERT INTO public.categories ("categoryId", "categoryName") VALUES (3, 'Pants  
 -- Dependencies: 206
 -- Data for Name: orders; Type: TABLE DATA; Schema: public; Owner: -
 --
-
+    
 
 
 --
