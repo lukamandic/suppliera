@@ -16,6 +16,17 @@ app.get('/', function(req, res) {
     });
 });
 
+app.get('/:id', function(req, res) {
+    const { id } = req.params;
+    pool.query('SELECT * FROM users WHERE "userId"=' + id, (err, data) => {
+        if (!err) {
+            res.send({data: data.rows})
+        } else {
+            console.log(err);
+        }
+    });
+});
+
 app.get('/paginate', function(req, res) {
     const { limit, skip } = req.query;
 

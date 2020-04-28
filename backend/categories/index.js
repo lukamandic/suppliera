@@ -15,6 +15,18 @@ app.get('/', function(req, res) {
     });
 });
 
+app.get('/:id', function(req, res) {
+    const { id } = req.params;
+    pool.query('SELECT * FROM categories WHERE "categoryId"=' + id, (err, data) => {
+        if (!err) {
+            console.log(data.rows);
+            res.send({data: data.rows})
+        } else {
+            console.log(err);
+        }
+    });
+});
+
 app.get('/paginate', function(req, res) {
     const { limit, skip } = req.query;
 

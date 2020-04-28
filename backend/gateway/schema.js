@@ -40,14 +40,19 @@ const schema = buildSchema(`
     type Query {
         users: [User],
         usersPagination (limit: Int!, skip: Int!): [User],
+        getUserById (id: Int!): [User],
         brands: [Brand],
         brandsPagination (limit: Int!, skip: Int!): [Brand],
+        getBrandById (id: Int!): [Brand],
         products: [Product],
         productsPagination (limit: Int!, skip: Int!): [Product],
+        getProductById (id: Int!): [Product],
         categories: [Category],
         categoriesPagination (limit: Int!, skip: Int!): [Category],
+        getCategoryById (id: Int!): [Category],
         orders: [Order],
         ordersPagination (limit: Int!, skip: Int!): [Order],
+        getOrderById (id: Int!): [Order],
     }
 `);
 
