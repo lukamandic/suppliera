@@ -6,6 +6,11 @@ const { calls } = require('./apiCalls.js');
 const app = express();
 
 var root = {
+    createBrand: calls.createBrand,
+    createProduct: calls.createProduct,
+    createOrder: calls.createOrder,
+    createUser: calls.createUser,
+    createCategory: calls.createCategory,
     productsPagination: calls.productsPagination,
     brandsPagination: calls.brandsPagination,
     usersPagination: calls.usersPagination,

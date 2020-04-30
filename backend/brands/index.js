@@ -1,6 +1,12 @@
 const express = require('express');
 const app = express();
+const bodyParser = require('body-parser');
 const { connection } = require('./connection.js');
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+    extended: true
+}))
 
 const pool = connection;
 
@@ -15,7 +21,7 @@ app.get('/', function(req, res) {
     });
 });
 
-app.get('/:id', function(req, res) {
+app.get('/one/:id', function(req, res) {
     const { id } = req.params;
     pool.query('SELECT * FROM brands WHERE "brandId"=' + id, (err, data) => {
         if (!err) {
@@ -33,6 +39,28 @@ app.get('/paginate', function(req, res) {
     pool.query('SELECT * FROM brands LIMIT ' + limit + ' OFFSET ' + skip, (err, data) => {
         if (!err) {
             res.send({data: data.rows})
+        } else {
+            console.log(err);
+        }
+    });
+});
+
+app.post('/insert', function(req, res) {
+    const {
+        brandName
+     } = req.body.args;
+
+    const query = `INSERT into brands(
+        "brandName"
+    ) VALUES ($1) RETURNING *`;
+
+    const values = [
+        brandName
+    ];
+
+    pool.query(query, values, (err, data) => {
+        if (!err) {
+            res.send({data: data})
         } else {
             console.log(err);
         }

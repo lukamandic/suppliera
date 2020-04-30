@@ -1,6 +1,16 @@
 const axios = require('axios');
+const { productMutations } = require('./mutations/products.js');
+const { userMutations } = require('./mutations/users.js');
+const { orderMutations } = require('./mutations/orders.js');
+const { categoryMutations } = require('./mutations/categories.js');
+const { brandMutations } = require('./mutations/brands.js');
 
 const calls = {
+    createProduct: productMutations.createProduct,
+    createBrand: brandMutations.createBrand,
+    createCategory: categoryMutations.createCategory,
+    createOrder: orderMutations.createOrder,
+    createUser: userMutations.createUser,
     productsPagination: async ({limit, skip}) => {
         return await axios.get('http://products:3000/paginate?limit=' + limit + '&skip=' + skip, { data: { limit, skip } })
             .then((res) => {
@@ -18,7 +28,7 @@ const calls = {
             });
     },
     getProductById: async ({id}) => {
-        return await axios.get('http://products:3000/' + id)
+        return await axios.get('http://products:3000/one/' + id)
             .then((res) => {
                 return res.data.data;
             }).catch((err) => {
@@ -42,7 +52,7 @@ const calls = {
             })
     },
     getBrandById: async ({id}) => {
-        return await axios.get('http://brands:3000/' + id)
+        return await axios.get('http://brands:3000/one/' + id)
             .then((res) => {
                 return res.data.data;
             }).catch((err) => {
@@ -66,7 +76,7 @@ const calls = {
             })
     },
     getUserById: async ({id}) => {
-        return await axios.get('http://users:3000/' + id)
+        return await axios.get('http://users:3000/one/' + id)
             .then((res) => {
                 return res.data.data;
             }).catch((err) => {
@@ -90,7 +100,7 @@ const calls = {
             })
     },
     getOrderById: async ({id}) => {
-        return await axios.get('http://orders:3000/' + id)
+        return await axios.get('http://orders:3000/one/' + id)
             .then((res) => {
                 return res.data.data;
             }).catch((err) => {
@@ -114,7 +124,7 @@ const calls = {
             })
     },
     getCategoryById: async ({id}) => {
-        return await axios.get('http://categories:3000/' + id)
+        return await axios.get('http://categories:3000/one/' + id)
             .then((res) => {
                 return res.data.data;
             }).catch((err) => {
