@@ -67,4 +67,38 @@ app.post('/insert', function(req, res) {
     });
 });
 
+app.put('/update', function(req, res) {
+    const { 
+        categoryId, 
+        categoryName 
+    } = req.body.args;
+
+    const values = [
+        categoryName,
+        categoryId
+    ];
+
+    pool.query('UPDATE categories SET "categoryName" = $1 WHERE "categoryId" = $2', values, (err, data) => {
+        if (!err) {
+            res.send({data: data.rows})
+        } else {
+            console.log(err);
+        }
+    });
+});
+
+app.delete('/delete', function(req, res) {
+
+    const parsedJSON = JSON.parse(req.query.args)
+    const { cateogryId } = parsedJSON;
+
+    pool.query('DELETE FROM categories WHERE "categoryId" = $1', [categoryId], (err, data) => {
+        if (!err) {
+            res.send({data: data.rows})
+        } else {
+            console.log(err);
+        }
+    });
+});
+
 app.listen(3000);

@@ -1,37 +1,21 @@
 const express = require('express');
 const graphqlHTTP = require('express-graphql');
-const { schema } = require('./schema.js');
+const { schema } = require('./schemas/schemas.js');
 const { calls } = require('./apiCalls.js');
 
 const app = express();
 
-var root = {
-    createBrand: calls.createBrand,
-    createProduct: calls.createProduct,
-    createOrder: calls.createOrder,
-    createUser: calls.createUser,
-    createCategory: calls.createCategory,
-    productsPagination: calls.productsPagination,
-    brandsPagination: calls.brandsPagination,
-    usersPagination: calls.usersPagination,
-    ordersPagination: calls.ordersPagination,
-    categoriesPagination: calls.categoriesPagination,
-    getBrandById: calls.getBrandById,
-    getProductById: calls.getProductById,
-    getUserById: calls.getUserById,
-    getOrderById: calls.getOrderById,
-    getCategoryById: calls.getCategoryById,
-    products: calls.products,
-    brands: calls.brands,
-    users: calls.users,
-    orders: calls.orders,
-    categories: calls.categories
+const middl = (req, res, next) => {
+    req.headers['Authorization'] = 'Basic token'
+    
+    next();
 }
 
-app.use('/suppliera', graphqlHTTP({
+app.use('/suppliera', middl, (req, res) =>  graphqlHTTP({
     schema: schema,
-    rootValue: root,
-    graphiql: true
-}));
+    rootValue: calls,
+    graphiql: true,
+    context: req.headers
+    })(req, res));
 
 app.listen(3000);

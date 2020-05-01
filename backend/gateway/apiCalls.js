@@ -7,12 +7,22 @@ const { brandMutations } = require('./mutations/brands.js');
 
 const calls = {
     createProduct: productMutations.createProduct,
+    deleteProduct: productMutations.deleteProduct,
+    updateProduct: productMutations.updateProduct,
+    deleteUser: userMutations.deleteUser,
+    updateUser: userMutations.updateUser,
+    deleteOrder: orderMutations.deleteOrder,
+    updateOrder: orderMutations.updateOrder,
+    deleteCategory: categoryMutations.deleteCategory,
+    updateCategory: categoryMutations.updateCategory,
+    deleteBrand: brandMutations.deleteBrand,
+    updateBrand: brandMutations.updateBrand,
     createBrand: brandMutations.createBrand,
     createCategory: categoryMutations.createCategory,
     createOrder: orderMutations.createOrder,
     createUser: userMutations.createUser,
     productsPagination: async ({limit, skip}) => {
-        return await axios.get('http://products:3000/paginate?limit=' + limit + '&skip=' + skip, { data: { limit, skip } })
+        return await axios.get(`http://products:3000/paginate?limit=${limit}&skip=${skip}`, { data: { limit, skip } })
             .then((res) => {
                 return res.data.data;
             }).catch((err) => {
@@ -28,7 +38,7 @@ const calls = {
             });
     },
     getProductById: async ({id}) => {
-        return await axios.get('http://products:3000/one/' + id)
+        return await axios.get(`http://products:3000/one/${id}`)
             .then((res) => {
                 return res.data.data;
             }).catch((err) => {
@@ -44,7 +54,7 @@ const calls = {
             });
     },
     brandsPagination: async ({limit, skip}) => {
-        return await axios.get('http://brands:3000/paginate?limit=' + limit + '&skip=' + skip, { data: { limit, skip } })
+        return await axios.get(`http://brands:3000/paginate?limit=${limit}&skip=${skip}`, { data: { limit, skip } })
             .then((res) => {
                 return res.data.data;
             }).catch((err) => {
@@ -52,7 +62,7 @@ const calls = {
             })
     },
     getBrandById: async ({id}) => {
-        return await axios.get('http://brands:3000/one/' + id)
+        return await axios.get(`http://brands:3000/one/'${id}`)
             .then((res) => {
                 return res.data.data;
             }).catch((err) => {
@@ -68,7 +78,7 @@ const calls = {
             });
     },
     usersPagination: async ({limit, skip}) => {
-        return await axios.get('http://brands:3000/users?limit=' + limit + '&skip=' + skip, { data: { limit, skip } })
+        return await axios.get(`http://brands:3000/users?limit=${limit}&skip=${skip}`, { data: { limit, skip } })
             .then((res) => {
                 return res.data.data;
             }).catch((err) => {
@@ -76,7 +86,7 @@ const calls = {
             })
     },
     getUserById: async ({id}) => {
-        return await axios.get('http://users:3000/one/' + id)
+        return await axios.get(`http://users:3000/one/${id}`)
             .then((res) => {
                 return res.data.data;
             }).catch((err) => {
@@ -92,7 +102,7 @@ const calls = {
             });
     },
     ordersPagination: async ({limit, skip}) => {
-        return await axios.get('http://orders:3000/paginate?limit=' + limit + '&skip=' + skip, { data: { limit, skip } })
+        return await axios.get(`http://orders:3000/paginate?limit=${limit}&skip=${skip}`, { data: { limit, skip } })
             .then((res) => {
                 return res.data.data;
             }).catch((err) => {
@@ -100,7 +110,7 @@ const calls = {
             })
     },
     getOrderById: async ({id}) => {
-        return await axios.get('http://orders:3000/one/' + id)
+        return await axios.get(`http://orders:3000/one/${id}`)
             .then((res) => {
                 return res.data.data;
             }).catch((err) => {
@@ -116,7 +126,7 @@ const calls = {
             });
     },
     categoriesPagination: async ({limit, skip}) => {
-        return await axios.get('http://categories:3000/paginate?limit=' + limit + '&skip=' + skip, { data: { limit, skip } })
+        return await axios.get(`http://categories:3000/paginate?limit=${limit}&skip=${skip}`, { data: { limit, skip } })
             .then((res) => {
                 return res.data.data;
             }).catch((err) => {
@@ -124,7 +134,7 @@ const calls = {
             })
     },
     getCategoryById: async ({id}) => {
-        return await axios.get('http://categories:3000/one/' + id)
+        return await axios.get(`http://categories:3000/one/${id}`)
             .then((res) => {
                 return res.data.data;
             }).catch((err) => {

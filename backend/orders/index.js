@@ -70,4 +70,18 @@ app.post('/insert', function(req, res) {
     });
 });
 
+app.delete('/delete', function(req, res) {
+
+    const parsedJSON = JSON.parse(req.query.args)
+    const { orderId } = parsedJSON;
+
+    pool.query('DELETE FROM orders WHERE "orderId" = $1', [orderId], (err, data) => {
+        if (!err) {
+            res.send({data: data.rows})
+        } else {
+            console.log(err);
+        }
+    });
+});
+
 app.listen(3000);

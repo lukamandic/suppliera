@@ -10,6 +10,24 @@ const orderMutations = {
                 console.log(err);
             });
     },
+    deleteOrders: async ( args ) => {
+        return await axios.delete('http://orders:3000/delete', { params: { args } })
+            .then((res) => {
+                return res.data.data;
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    },
+    updateOrders: async ( args ) => {
+        return await axios.put('http://orders:3000/update', { args })
+            .then((res) => {
+                return res.data.data;
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }
 }
 
 module.exports = {

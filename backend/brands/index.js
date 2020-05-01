@@ -34,7 +34,6 @@ app.get('/one/:id', function(req, res) {
 
 app.get('/paginate', function(req, res) {
     const { limit, skip } = req.query;
-    console.log(limit);
 
     pool.query('SELECT * FROM brands LIMIT ' + limit + ' OFFSET ' + skip, (err, data) => {
         if (!err) {
@@ -61,6 +60,42 @@ app.post('/insert', function(req, res) {
     pool.query(query, values, (err, data) => {
         if (!err) {
             res.send({data: data})
+        } else {
+            console.log(err);
+        }
+    });
+});
+
+app.put('/update', function(req, res) {
+    const { 
+        brandId, 
+        brandName 
+    } = req.body.args;
+
+    console.log(req.body.args);
+
+    const values = [
+        brandName,
+        brandId
+    ];
+
+    pool.query('UPDATE brands SET "brandName" = $1 WHERE "brandId" = $2', values, (err, data) => {
+        if (!err) {
+            res.send({data: data.rows})
+        } else {
+            console.log(err);
+        }
+    });
+});
+
+app.delete('/delete', function(req, res) {
+
+    const parsedJSON = JSON.parse(req.query.args)
+    const { brandId } = parsedJSON;
+
+    pool.query('DELETE FROM brands WHERE "brandId" = $1', [brandId], (err, data) => {
+        if (!err) {
+            res.send({data: data.rows})
         } else {
             console.log(err);
         }

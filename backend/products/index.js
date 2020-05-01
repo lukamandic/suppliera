@@ -86,4 +86,65 @@ app.post('/insert', function(req, res) {
     });
 });
 
+app.put('/update', function(req, res) {
+    const { 
+        productId,
+        productImageSource,
+        productCode,
+        productName,
+        productDescription,
+        productStock,
+        productPrice,
+        productBrand,
+        productCategory
+    } = req.body.args;
+
+    console.log(req.body.args);
+
+    const query = `UPDATE product SET 
+        "productImageSource" = $1,
+        "productCode" = $2,
+        "productName" = $3,
+        "productDescription" = $4,
+        "productStock" = $5,
+        "productPrice" = $6,
+        "productBrand" = $7,
+        "productCategory" = $8
+        WHERE "productId" = $9`;
+
+    const values = [
+        productImageSource,
+        productCode,
+        productName,
+        productDescription,
+        productStock,
+        productPrice,
+        productBrand,
+        productCategory,
+        productId
+    ];
+
+    pool.query(query, values, (err, data) => {
+        if (!err) {
+            res.send({data: data.rows})
+        } else {
+            console.log(err);
+        }
+    });
+});
+
+app.delete('/delete', function(req, res) {
+
+    const parsedJSON = JSON.parse(req.query.args)
+    const { productId } = parsedJSON;
+
+    pool.query('DELETE FROM product WHERE "productId" = $1', [productId], (err, data) => {
+        if (!err) {
+            res.send({data: data.rows})
+        } else {
+            console.log(err);
+        }
+    });
+});
+
 app.listen(3000);
